@@ -1,0 +1,47 @@
+create database aula_20231S_manha;
+use aula_20231S_manha;
+
+create table clientes
+(
+   idCliente  int primary key auto_increment,
+   nome       varchar(50) not null,
+   email      varchar(50) unique,
+   endereco   varchar(50),
+   telefone   char(18)
+);
+
+create table produtos
+(
+   idProduto int primary key auto_increment,
+   descricao varchar(50),
+   preco     float,
+   qtd_estoque int
+);
+
+create table pedidos
+(
+   idPedido    int  auto_increment,
+   data        date,
+   idCliente   int,
+   valor_total float,
+   constraint pk_pedidos primary key (idPedido),
+   constraint fk_pedidos_clientes foreign key (idCliente) references clientes (idCliente)
+);
+
+create table itens_pedido
+(
+    idPedido    int,
+    idProduto   int,
+    qtd         int,
+    valor       float,
+    subtotal    float,
+    constraint pk_itens_pedido primary key (idPedido, idProduto)
+);
+
+alter table itens_pedido
+add constraint fk_itens_produto foreign key (idProduto) 
+    references Produtos (idProduto);
+
+alter table itens_pedido
+add constraint fk_itens_pedido foreign key (idPedido) 
+     references Pedidos (idPedido);
