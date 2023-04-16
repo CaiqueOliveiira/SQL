@@ -40,8 +40,8 @@ create table itens_pedido
 
 alter table itens_pedido
 add constraint fk_itens_produto foreign key (idProduto) 
-    references Produtos (idProduto);
+    references produtos (idProduto);
 
 alter table itens_pedido
 add constraint fk_itens_pedido foreign key (idPedido) 
-     references Pedidos (idPedido);
+     references pedidos (idPedido);
